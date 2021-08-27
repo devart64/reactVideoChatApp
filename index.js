@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    socket.emit('moi', socket.id); // connexion
+    socket.emit('me', socket.id); // connexion
 
     socket.on('disconnect', () => {
         socket.broadcast.emit("callended") // déconnexion
