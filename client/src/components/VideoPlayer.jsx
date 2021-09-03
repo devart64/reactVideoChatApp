@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
             width: '300px',
         },
         gridContainer: {
-            justifyContent: 'center',
+            display: 'flex',
             [theme.breakpoints.down('xs')]: {
                 flexDirection: 'column',
             },
@@ -31,19 +31,29 @@ const VideoPlayer = () => {
     return(
         <Grid container className={classes.gridContainer}>
             {/** Our own video */}
-            <Paper className={classes.paper}>
-                <Grid item xs={12} md={6}>
-                    <Typography cariant="h5" gutterBottom>Name</Typography>
-                    <video playsInline muted ref={null} autoPlay className={classes.video} />
-                </Grid>
-            </Paper>
+            {
+                stream && (
+                    <Paper className={classes.paper}>
+                        <Grid item xs={12} md={6}>
+                            <Typography cariant="h5" gutterBottom>{name || 'Name'}</Typography>
+                            <video playsInline muted ref={myVideo} autoPlay className={classes.video} />
+                        </Grid>
+                    </Paper>
+                )
+            }
+           
             {/*  User's video */}
-            <Paper className={classes.paper}>
-                <Grid item xs={12} md={6}>
-                    <Typography cariant="h5" gutterBottom>Name</Typography>
-                    <video playsInline  ref={null} autoPlay className={classes.video} />
-                </Grid>
-            </Paper>
+            {
+                callAccepted && !callEnded && (
+                    <Paper className={classes.paper}>
+                        <Grid item xs={12} md={6}>
+                            <Typography cariant="h5" gutterBottom>{call.name || 'Name'}</Typography>
+                            <video playsInline  ref={userVideo} autoPlay className={classes.video} />
+                        </Grid>
+                    </Paper>
+                )
+            }
+            
         </Grid>
     )
 }
