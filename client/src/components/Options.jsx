@@ -49,20 +49,31 @@ const Options = ({ children }) => {
                 <form className={classes.root} noValidate autoComplete="off">
                     <Grid container className={classes.gridContainer}>
                         <Grid item xs={12} md={6} className={classes.padding}>
-                            <Typography gutterBottom variant="h6">User Info</Typography>
+                            <Typography gutterBottom variant="h6">Tes infos :</Typography>
                             <TextField label="Nom" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
                             <CopyToClipboard text={me} className={classes.margin}>
                                 <Button variant="contained" color="primary" fullWidth startIcon={<Assignment fontSize="large" />}>
-
+                                    Copy Your ID
                                 </Button>
                             </CopyToClipboard>
                         </Grid>
+                        <Grid item xs={12} md={6} className={classes.padding}>
+                            <Typography gutterBottom variant="h6">Passe un appel :</Typography>
+                            <TextField label="ID pour passer l'appel" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
+                            {callAccepted && !callEnded ? (
+                                <Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={leaveCall} className={classes.margin}>
+                                    Racrocher
+                                </Button>
+                            ) : (
+                                <Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => callUser(idToCall)} className={classes.margin}>
+                                    Appeler
+                                </Button>
+                            )                            }
+                        </Grid>
                     </Grid>
                 </form>
-
+                {children}
             </Paper>
-           Options
-           {children}
         </Container>
     )
 }
